@@ -23,7 +23,7 @@ namespace ODataSamples.Infrastructure
 
                 var backendTask = new TaskToDo()
                 {
-                    Title = "Dev C# code",
+                    Title = "Dev CSharp code",
                     Start = DateTime.Now,
                     DeadLine = DateTime.Now.AddDays(15),
                     Status = false

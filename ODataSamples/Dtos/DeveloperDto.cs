@@ -1,5 +1,6 @@
 ﻿using ODataSamples.Domain;
 using ODataSamples.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +11,9 @@ namespace ODataSamples.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public DevType DevType { get; set; }
-        public List<TaskToDoDto> TasksToDo { get; set; }        
+        public List<TaskToDoDto> TasksToDo { get; set; }
+
+        public static Func<Developer, DeveloperDto> MapDomainToDto = (developer) => Map(developer);
 
         public DeveloperDto()
         {
