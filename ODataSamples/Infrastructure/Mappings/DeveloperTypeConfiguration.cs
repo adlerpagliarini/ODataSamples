@@ -11,6 +11,7 @@ namespace ODataSamples.Infrastructure.Mappings
             builder.HasKey(e => e.Id);
             builder.Property(p => p.Name).HasColumnType("varchar(50)").IsRequired();
             builder.HasMany(t => t.TasksToDo).WithOne().HasForeignKey(k => k.UserId);
+            builder.HasOne(t => t.Goal).WithOne().HasForeignKey<Goal>(k => k.UserId);
         }
     }
 }

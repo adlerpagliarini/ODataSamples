@@ -24,6 +24,7 @@ namespace ODataSamples.Infrastructure.ODataMappings
                     _builder = new ODataConventionModelBuilder(provider);
                     _builder.MapODataEntity<Developer>();
                     _builder.MapODataEntity<TaskToDo>();
+                    _builder.MapODataEntity<Goal>();
                 }
                 _initializedBuilder = true;
             }

@@ -8,6 +8,7 @@ namespace ODataSamples.Domain
     {
         public string Name { get; set; }
         public DevType DevType { get; set; }
+        public Goal Goal { get; set; }
         private ICollection<TaskToDo> _tasksToDo { get; set; }
         public virtual IReadOnlyCollection<TaskToDo> TasksToDo { get { return _tasksToDo as Collection<TaskToDo>; } }
 
