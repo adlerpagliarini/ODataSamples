@@ -12,6 +12,7 @@ namespace ODataSamples.Infrastructure.Mappings
             builder.Property(p => p.Title).HasColumnType("varchar(50)").IsRequired();
             builder.Property(p => p.DeadLine).IsRequired();
             builder.Property(p => p.Status).IsRequired();
+            builder.Ignore(e => e.CascadeMode);
         }
     }
 }

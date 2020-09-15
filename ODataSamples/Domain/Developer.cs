@@ -15,6 +15,7 @@ namespace ODataSamples.Domain
         public Developer()
         {
             _tasksToDo = new Collection<TaskToDo>();
+            Goal = new Goal();
         }
 
         public void AddItemToDo(TaskToDo todo)
@@ -28,6 +29,17 @@ namespace ODataSamples.Domain
                 Id = this.Id
             };
             _tasksToDo.Add(_todo);
+        }
+
+        public void SetGoal(Goal goal)
+        {
+            var _goal = new Goal()
+            {
+                Title = goal.Title,
+                UserId = this.Id
+            };
+
+            Goal = _goal;
         }
     }
 }

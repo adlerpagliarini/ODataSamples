@@ -13,6 +13,8 @@ namespace ODataSamples.Infrastructure
             {
                 if (context.Developer.Any()) return;
 
+                var goal = new Goal() { Title = "Complete o Data " };
+
                 var frontendTask = new TaskToDo()
                 {
                     Title = "Dev HTML page",
@@ -35,6 +37,7 @@ namespace ODataSamples.Infrastructure
                     DevType = DevType.FrontEnd
                 };
                 frontend.AddItemToDo(frontendTask);
+                frontend.SetGoal(goal);
 
                 var backend = new Developer()
                 {
@@ -42,6 +45,7 @@ namespace ODataSamples.Infrastructure
                     DevType = DevType.BackEnd
                 };
                 backend.AddItemToDo(backendTask);
+                backend.SetGoal(goal);
 
                 var fullstack = new Developer()
                 {
@@ -50,6 +54,7 @@ namespace ODataSamples.Infrastructure
                 };
                 fullstack.AddItemToDo(frontendTask);
                 fullstack.AddItemToDo(backendTask);
+                fullstack.SetGoal(goal);
 
                 context.Developer.AddRange(frontend, backend, fullstack);
                 context.SaveChanges();
