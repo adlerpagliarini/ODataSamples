@@ -1,11 +1,13 @@
-﻿using FluentValidation;
-
-namespace ODataSamples.Domain
+﻿namespace ODataSamples.Domain
 {
-    public abstract class Identity<TEntity> : AbstractValidator<TEntity>
+    public abstract class Identity<TEntity>
+        where TEntity : Identity<TEntity>
     {
-        protected Identity() { }
+        protected Identity() {
+            Validator = new IdentityValidator<TEntity>();
+        }
         public int Id { get; set; }
-        // public bool CascadeMode { get; set; }
+        protected IdentityValidator<TEntity> Validator { get; private set; }
+        public virtual bool IsValid() => true;
     }
 }

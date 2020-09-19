@@ -50,7 +50,7 @@ namespace ODataSamples.Infrastructure.ODataMappings
         public static void MapODataEntity<TEntity>(this ODataConventionModelBuilder builder)
             where TEntity : Identity<TEntity>
         {
-            builder.EntitySet<TEntity>(typeof(TEntity).Name).EntityType.HasKey(e => e.Id).Select().Filter().OrderBy().Expand().Ignore(e => e.CascadeMode);
+            builder.EntitySet<TEntity>(typeof(TEntity).Name).EntityType.HasKey(e => e.Id).Select().Filter().OrderBy().Expand();
         }
 
         public static void MapODataDto<Translator>(this ODataConventionModelBuilder builder)
