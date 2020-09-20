@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ODataSamples.Extensions
 {
@@ -16,6 +14,5 @@ namespace ODataSamples.Extensions
         public static bool IsGenericList(this Type type) => type.IsGenericType && typeof(List<>) == type.GetGenericTypeDefinition();
         public static bool IsGenericCollection(this Type type) => type.IsGenericType && typeof(Collection<>) == type.GetGenericTypeDefinition();
         public static bool IsGenericAndIsEnumerable(this Type type) => type.IsGenericType && typeof(IEnumerable).IsAssignableFrom(type);
-
     }
 }

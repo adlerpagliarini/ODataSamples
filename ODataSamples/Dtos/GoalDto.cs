@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ODataSamples.Domain
+﻿namespace ODataSamples.Domain
 {
     public class GoalDto
     {

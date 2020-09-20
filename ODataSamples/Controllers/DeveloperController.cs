@@ -36,13 +36,12 @@ namespace ODataSamples.Controllers
         public async Task<IActionResult> OData(ODataQueryOptions<DeveloperDto> oDataQuery)
         {
             var edmModel = EdmModelConfig.GetEdmModel();
-            var edmNavigationSource = edmModel.FindDeclaredEntitySet(nameof(Developer));
+            var edmEntitySet = edmModel.FindDeclaredEntitySet(nameof(Developer));
 
             var context = new ODataQueryContext(edmModel, typeof(Developer), oDataQuery.Context.Path);
             var edmType = context.ElementType;
 
             var parameters = new Dictionary<string, string>();
-
             if (!string.IsNullOrWhiteSpace(oDataQuery.RawValues.Filter))
                 parameters.Add("$filter", oDataQuery.RawValues.Filter);
 
@@ -52,11 +51,9 @@ namespace ODataSamples.Controllers
             if (!string.IsNullOrWhiteSpace(oDataQuery.RawValues.OrderBy))
                 parameters.Add("$orderby", oDataQuery.RawValues.OrderBy);
 
-            var parser = new ODataQueryOptionParser(edmModel, edmType, edmNavigationSource, parameters);
+            var parser = new ODataQueryOptionParser(edmModel, edmType, edmEntitySet, parameters);
 
-            IQueryable<object> expandableQueryable = null;
             var queryable = (IQueryable<Developer>)_databaseContext.Developer;
-
             if (!string.IsNullOrWhiteSpace(oDataQuery.RawValues.Filter))
             {
                 var filter = new FilterQueryOption(oDataQuery.RawValues.Filter, context, parser);
@@ -69,6 +66,7 @@ namespace ODataSamples.Controllers
                 queryable = orderBy.ApplyTo(queryable, new ODataQuerySettings());
             }
 
+            IQueryable<object> expandableQueryable = null;
             if (!string.IsNullOrWhiteSpace(oDataQuery.RawValues.Expand))
             {
                 var expand = new SelectExpandQueryOption(null, oDataQuery.RawValues.Expand, context, parser);

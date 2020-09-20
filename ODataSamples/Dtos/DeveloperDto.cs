@@ -14,8 +14,6 @@ namespace ODataSamples.Dtos
         public GoalDto Goal { get; set; }
         public List<TaskToDoDto> TasksToDo { get; set; }
 
-        public static Func<Developer, DeveloperDto> MapDomainToDto = (developer) => Map(developer);
-
         public DeveloperDto()
         {
             TasksToDo = new List<TaskToDoDto>();
@@ -29,6 +27,8 @@ namespace ODataSamples.Dtos
             Goal = goal;
             TasksToDo = tasksToDo;
         }
+
+        public static Func<Developer, DeveloperDto> MapDomainToDto = (developer) => Map(developer);
 
         public static DeveloperDto Map(Developer domain) => domain is null ? default :
             new DeveloperDto(domain.Id, domain.Name, domain.DevType, GoalDto.Map(domain.Goal), domain.TasksToDo.Select(e => TaskToDoDto.Map(e)).ToList());

@@ -1,5 +1,6 @@
 ﻿using Microsoft.OData.Edm;
 using ODataSamples.Dtos;
+using ODataSamples.Extensions;
 using System;
 
 namespace ODataSamples.Infrastructure.ODataMappings
