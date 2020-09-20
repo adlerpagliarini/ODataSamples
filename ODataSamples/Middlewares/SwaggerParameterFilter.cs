@@ -13,7 +13,7 @@ namespace ODataSamples.Middlewares
             {
                 operation.Parameters.Remove(odataParam);
 
-                var odataParams = new string[] { "$count", "$expand", "$filter", "$orderby", "$select", "$skip", "$top" };
+                var odataParams = new string[] { "$expand", "$filter", "$orderby", "$pageindex", "$pagesize" };
 
                 foreach (var param in odataParams)
                 {

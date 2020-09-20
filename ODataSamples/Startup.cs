@@ -82,21 +82,9 @@ namespace ODataSamples
                 endpoints.MapControllers();
 
                 // 2. OData - Enable Dependency Injection on current routes
-                // endpoints.EnableDependencyInjection();
-
-                // 3. OData - Enable operations for all entities
-                // endpoints.Select().Filter().OrderBy().Expand().MaxTop(100);
-
-                //endpoints.EnableDependencyInjection(builder =>
-                //{
-                //    var modelConfig = ODataMappings.GetEdmModel(app.ApplicationServices);
-                //    builder.AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(IEdmModel), sp => modelConfig)
-                //    .AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => new StringAsEnumResolver())
-                //    .AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => new UnqualifiedCallAndEnumPrefixFreeResolver { EnableCaseInsensitive = true });
-                //});
-
                 endpoints.EnableDependencyInjection(builder =>
                 {
+                    // 3. OData - Enable operations for mapped entities
                     builder.AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(IEdmModel), sp => EdmDtoConfig.GetEdmModel(app.ApplicationServices))
                     .AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => new StringAsEnumResolver())
                     .AddService(Microsoft.OData.ServiceLifetime.Singleton, typeof(ODataUriResolver), sp => new UnqualifiedCallAndEnumPrefixFreeResolver { EnableCaseInsensitive = true });
