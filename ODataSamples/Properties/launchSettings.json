@@ -12,7 +12,7 @@
     "SimpleOData": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "developer/onMemory",
+      "launchUrl": "swagger/index.html",
       "applicationUrl": "https://localhost:44316",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

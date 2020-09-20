@@ -14,6 +14,7 @@ namespace ODataSamples.Middlewares
                 operation.Parameters.Remove(odataParam);
 
                 var odataParams = new string[] { "$count", "$expand", "$filter", "$orderby", "$select", "$skip", "$top" };
+
                 foreach (var param in odataParams)
                 {
                     operation.Parameters.Add(new OpenApiParameter

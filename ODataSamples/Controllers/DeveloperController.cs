@@ -34,12 +34,12 @@ namespace ODataSamples.Controllers
         // 4.1. Enable Query on this Method
         [HttpGet("OnMemory")]
         [EnableQuery]
-        public IEnumerable<Developer> OnMemory() => _databaseContext.Developer.ToList();
+        public IActionResult OnMemory() => Ok(_databaseContext.Developer.ToList());
 
         // 4.2. Enable Query on this Method
         [HttpGet("OnContext")]
         [EnableQuery]
-        public IEnumerable<Developer> OnContext() => _databaseContext.Developer;
+        public IActionResult OnContext() => Ok(_databaseContext.Developer);
 
         // 4.3. Enable Query on this Method
         [HttpGet("OnContextApply")]
