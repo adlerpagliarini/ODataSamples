@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNet.OData.Builder;
 using Microsoft.OData.Edm;
 using ODataSamples.Domain;
+using ODataSamples.Extensions;
 using System;
+using System.Linq;
 
 namespace ODataSamples.Infrastructure.ODataMappings
 {
@@ -51,6 +53,26 @@ namespace ODataSamples.Infrastructure.ODataMappings
             where TEntity : Identity<TEntity>
         {
             builder.EntitySet<TEntity>(typeof(TEntity).Name).EntityType.HasKey(e => e.Id).Select().Filter().OrderBy().Expand();
+
+            var structuralTypes = builder.StructuralTypes.First(e => e.ClrType == typeof(TEntity));
+            var props = typeof(TEntity).GetProperties();
+
+            foreach (var prop in props)
+            {
+                if (prop.PropertyType.IsEnum())
+                {
+                    structuralTypes.AddEnumProperty(prop);
+                    builder.AddEnumType(prop.PropertyType);
+                }
+                else if (!prop.PropertyType.IsNonStringClass() && !prop.PropertyType.IsGenericAndIsEnumerable())
+                    structuralTypes.AddProperty(prop);
+                else if (prop.PropertyType.IsGenericAndIsEnumerable())
+                    structuralTypes.AddNavigationProperty(prop, EdmMultiplicity.Many);
+                else if (prop.PropertyType.IsNonStringClass())
+                    structuralTypes.AddNavigationProperty(prop, EdmMultiplicity.ZeroOrOne);
+                else
+                    throw new ArgumentException("Prop info not mapped into OData");
+            }
         }
 
         public static void MapODataDto<Translator>(this ODataConventionModelBuilder builder)

@@ -4,10 +4,21 @@ namespace ODataSamples.Domain
 {
     public class TaskToDo : Identity<TaskToDo>
     {
-        public string Title { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime DeadLine { get; set; }
-        public bool Status { get; set; }
-        public int UserId { get; set; }
+        public TaskToDo(string title, DateTime start, DateTime deadLine, bool status, int userId)
+        {
+            Title = title;
+            Start = start;
+            DeadLine = deadLine;
+            Status = status;
+            UserId = userId;
+        }
+
+        protected TaskToDo() { }
+
+        public string Title { get; protected set; }
+        public DateTime Start { get; protected set; }
+        public DateTime DeadLine { get; protected set; }
+        public bool Status { get; protected set; }
+        public int UserId { get; protected set; }
     }
 }
